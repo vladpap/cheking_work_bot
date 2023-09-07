@@ -42,6 +42,10 @@ def main():
 
         response.raise_for_status()
         checked_works = response.json()
+        if checked_works['status'] == 'timeout':
+            timestamp = checked_works['timestamp_to_request']
+            continue
+
         for checked_work in checked_works['new_attempts']:
             if checked_work['is_negative']:
                 lesson_link = checked_work['lesson_url']
