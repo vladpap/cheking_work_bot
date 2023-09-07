@@ -19,14 +19,14 @@ $ pip install -r requirements.txt
 Часть настроек проекта берётся из переменных окружения. Чтобы их определить, создайте файл `.env`  запишите туда данные в таком формате: `ПЕРЕМЕННАЯ=значение`.
 
 - `DEVMAN_API_TOKEN` - ваш персональный токен API Девмана
-- `BOT_TOKEN` - ключ телеграм бота
-- `CHAT_ID` - ваш chat_idю Чтобы получить свой chat_id, напишите в Telegram специальному боту: [@userinfobot](@userinfobot)
+- `TG_TOKEN` - ключ телеграм бота
+- `TG_CHAT_ID` - ваш chat_idю Чтобы получить свой chat_id, напишите в Telegram специальному боту: [@userinfobot](@userinfobot)
 
 Пример файла `.env`
 ```console
 DEVMAN_API_TOKEN=09845986af64e6751206d26faadc5d147d5fab
-BOT_TOKEN=95132391:wP3db3301vnrob33BZdb33KwP3db3F1I
-CHAT_ID=9954393459
+TG_TOKEN=95132391:wP3db3301vnrob33BZdb33KwP3db3F1I
+TG_CHAT_ID=9954393459
 ```
 
 ## Запуск

@@ -14,13 +14,13 @@ def main():
     env.read_env(override=True)
 
     DEVMAN_API_TOKEN = env.str('DEVMAN_API_TOKEN')
-    BOT_TOKEN = env.str('BOT_TOKEN')
-    CHAT_ID = env.int('CHAT_ID')
+    TG_TOKEN = env.str('TG_TOKEN')
+    TG_CHAT_ID = env.int('TG_CHAT_ID')
 
     TIME_WAIT_LONG_POLLiNG = 10
     TIME_WAIT_WITHOUT_CONNECTION = 90
 
-    updater = Updater(BOT_TOKEN)
+    updater = Updater(TG_TOKEN)
 
     long_polling_url = 'https://dvmn.org/api/long_polling/'
     headers = {'Authorization': f'Token {DEVMAN_API_TOKEN}'}
@@ -52,7 +52,7 @@ def main():
             text_message = 'У вас проверили работу <b>'\
                 f'"{attempt["lesson_title"]}"</b>'\
                 f'\n\n {summary_of_teacher}'
-            updater.bot.send_message(chat_id=CHAT_ID,
+            updater.bot.send_message(chat_id=TG_CHAT_ID,
                                      text=text_message,
                                      parse_mode=ParseMode.HTML)
 
