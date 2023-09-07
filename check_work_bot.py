@@ -40,6 +40,7 @@ def main():
             time.sleep(TIME_WAIT_WITHOUT_CONNECTION)
             continue
 
+        response.raise_for_status()
         response_check_works = response.json()
         for attempt in response_check_works['new_attempts']:
             if attempt['is_negative']:
