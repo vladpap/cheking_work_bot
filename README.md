@@ -32,7 +32,7 @@ CHAT_ID=9954393459
 ## Запуск
 
 ```console
-$ python3 
+$ python3 check_work_bot.py
 ```
 
 ## Цели проекта
