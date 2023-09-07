@@ -41,23 +41,23 @@ def main():
             continue
 
         response.raise_for_status()
-        response_check_works = response.json()
-        for attempt in response_check_works['new_attempts']:
-            if attempt['is_negative']:
-                lesson_link = attempt['lesson_url']
+        checked_works = response.json()
+        for checked_work in checked_works['new_attempts']:
+            if checked_work['is_negative']:
+                lesson_link = checked_work['lesson_url']
                 summary_of_teacher = 'К сожалению, в работе есть ошибки.'\
                     f'\n <a href="{lesson_link}">Ссылка на урок</a>'
             else:
                 summary_of_teacher = 'Преподавателю все понравилось,'\
                     'можно приступать к следующему уроку.'
             text_message = 'У вас проверили работу <b>'\
-                f'"{attempt["lesson_title"]}"</b>'\
+                f'"{checked_work["lesson_title"]}"</b>'\
                 f'\n\n {summary_of_teacher}'
             updater.bot.send_message(chat_id=TG_CHAT_ID,
                                      text=text_message,
                                      parse_mode=ParseMode.HTML)
 
-        timestamp = response_check_works['last_attempt_timestamp']
+        timestamp = checked_works['last_attempt_timestamp']
 
 
 if __name__ == '__main__':
