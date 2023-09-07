@@ -45,14 +45,23 @@ def main():
         for checked_work in checked_works['new_attempts']:
             if checked_work['is_negative']:
                 lesson_link = checked_work['lesson_url']
-                summary_of_teacher = 'К сожалению, в работе есть ошибки.'\
-                    f'\n <a href="{lesson_link}">Ссылка на урок</a>'
+                summary_of_teacher = f'''\
+К сожалению, в работе есть ошибки.
+
+<a href="{lesson_link}">Ссылка на урок</a>'''
+
             else:
-                summary_of_teacher = 'Преподавателю все понравилось,'\
-                    'можно приступать к следующему уроку.'
-            text_message = 'У вас проверили работу <b>'\
-                f'"{checked_work["lesson_title"]}"</b>'\
-                f'\n\n {summary_of_teacher}'
+                summary_of_teacher = '''\
+Преподавателю все понравилось,
+можно приступать к следующему уроку.'''
+
+            text_message = f'''\
+У вас проверили работу <b>
+{checked_work["lesson_title"]}</b>
+
+
+{summary_of_teacher}'''
+
             updater.bot.send_message(chat_id=TG_CHAT_ID,
                                      text=text_message,
                                      parse_mode=ParseMode.HTML)
