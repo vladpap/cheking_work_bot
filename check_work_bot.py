@@ -19,8 +19,8 @@ def main():
     TG_TOKEN = env.str('TG_TOKEN')
     TG_CHAT_ID = env.int('TG_CHAT_ID')
 
-    TIME_WAIT_LONG_POLLiNG = 10
-    TIME_WAIT_WITHOUT_CONNECTION = 90
+    time_wait_long_polling = 10
+    time_wait_without_connection = 90
 
     updater = Updater(TG_TOKEN)
 
@@ -34,12 +34,12 @@ def main():
         try:
             response = requests.get(long_polling_url,
                                     headers=headers,
-                                    timeout=TIME_WAIT_LONG_POLLiNG,
+                                    timeout=time_wait_long_polling,
                                     params=params)
         except requests.exceptions.ReadTimeout:
             continue
         except requests.exceptions.ConnectionError:
-            time.sleep(TIME_WAIT_WITHOUT_CONNECTION)
+            time.sleep(time_wait_without_connection)
             continue
 
         response.raise_for_status()
