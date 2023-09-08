@@ -5,6 +5,8 @@ from environs import Env
 
 import requests
 
+import textwrap
+
 from telegram import ParseMode
 from telegram.ext import Updater
 
@@ -49,27 +51,27 @@ def main():
         for checked_work in checked_works['new_attempts']:
             if checked_work['is_negative']:
                 lesson_link = checked_work['lesson_url']
-                summary_of_teacher = f'''\
-К сожалению, в работе есть ошибки.
+                summary_of_teacher = f'''
+                К сожалению, в работе есть ошибки.
 
-<a href="{lesson_link}">Ссылка на урок</a>'''
+                <a href="{lesson_link}">Ссылка на урок</a>'''
 
             else:
-                summary_of_teacher = '''\
-Преподавателю все понравилось,
-можно приступать к следующему уроку.'''
+                summary_of_teacher = '''
+                Преподавателю все понравилось,
+                можно приступать к следующему уроку.'''
 
-            text_message = f'''\
-У вас проверили работу <b>
-{checked_work["lesson_title"]}</b>
+            text_message = f'''
+                У вас проверили работу
+                <b>{checked_work["lesson_title"]}</b>
 
 
-{summary_of_teacher}'''
+                {summary_of_teacher}'''
 
             updater.bot.send_message(chat_id=TG_CHAT_ID,
-                                     text=text_message,
+                                     text=textwrap.dedent(text_message),
                                      parse_mode=ParseMode.HTML)
-
+            print(textwrap.dedent(text_message))
         timestamp = checked_works['last_attempt_timestamp']
 
 
