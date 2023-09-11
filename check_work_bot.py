@@ -15,17 +15,17 @@ def main():
     env = Env()
     env.read_env(override=True)
 
-    DEVMAN_API_TOKEN = env.str('DEVMAN_API_TOKEN')
-    TG_TOKEN = env.str('TG_TOKEN')
-    TG_CHAT_ID = env.int('TG_CHAT_ID')
+    devman_api_token = env.str('DEVMAN_API_TOKEN')
+    tg_token = env.str('TG_TOKEN')
+    tg_chat_id = env.int('TG_CHAT_ID')
 
     time_wait_long_polling = 10
     time_wait_without_connection = 90
 
-    updater = Updater(TG_TOKEN)
+    updater = Updater(tg_token)
 
     long_polling_url = 'https://dvmn.org/api/long_polling/'
-    headers = {'Authorization': f'Token {DEVMAN_API_TOKEN}'}
+    headers = {'Authorization': f'Token {devman_api_token}'}
 
     timestamp = datetime.now().timestamp()
 
@@ -68,7 +68,7 @@ def main():
 
                 {summary_of_teacher}'''
 
-            updater.bot.send_message(chat_id=TG_CHAT_ID,
+            updater.bot.send_message(chat_id=tg_chat_id,
                                      text=textwrap.dedent(text_message),
                                      parse_mode=ParseMode.HTML)
             print(textwrap.dedent(text_message))
