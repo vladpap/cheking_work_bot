@@ -32,6 +32,9 @@ def main():
     long_polling_url = 'https://dvmn.org/api/long_polling/'
     headers = {'Authorization': f'Token {devman_api_token}'}
 
+    updater.bot.send_message(chat_id=tg_chat_id,
+                             text='Starting bot')
+
     timestamp = datetime.now().timestamp()
 
     while True:
