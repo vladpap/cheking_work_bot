@@ -5,7 +5,7 @@ from datetime import datetime
 
 import requests
 from environs import Env
-from systemd.journal import JournalHandler
+from systemd import journal
 from telegram import ParseMode
 from telegram.ext import Updater
 
@@ -13,7 +13,7 @@ from telegram.ext import Updater
 def main():
 
     log = logging.getLogger('checking_work_bot')
-    log.addHandler(JournalHandler())
+    log.addHandler(journal.JournaldLogHandler())
     log.setLevel(logging.INFO)
     log.info("Starting bot")
 
