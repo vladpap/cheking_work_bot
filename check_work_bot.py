@@ -1,6 +1,7 @@
 import logging
 import textwrap
 import time
+import traceback
 from datetime import datetime
 
 import requests
@@ -80,6 +81,14 @@ def main():
                                      text=textwrap.dedent(text_message),
                                      parse_mode=ParseMode.HTML)
             log.info("Send message")
+
+        try:
+            0/0
+        except Exception as err:
+            logging.exception(err)
+            updater.bot.send_message(
+                chat_id=tg_chat_id,
+                text=f'Бот упал с ошибкой:\n{err}\n{traceback.format_exc()}')
         timestamp = checked_works['last_attempt_timestamp']
 
 
