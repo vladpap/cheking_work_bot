@@ -71,7 +71,6 @@ def main():
             updater.bot.send_message(chat_id=tg_chat_id,
                                      text=textwrap.dedent(text_message),
                                      parse_mode=ParseMode.HTML)
-            print(textwrap.dedent(text_message))
         timestamp = checked_works['last_attempt_timestamp']
 
 
