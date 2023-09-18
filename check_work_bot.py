@@ -1,17 +1,22 @@
+import logging
+import textwrap
 import time
 from datetime import datetime
 
-from environs import Env
-
 import requests
-
-import textwrap
-
+from environs import Env
+from systemd.journal import JournalHandler
 from telegram import ParseMode
 from telegram.ext import Updater
 
 
 def main():
+
+    log = logging.getLogger('checking_work_bot')
+    log.addHandler(JournalHandler())
+    log.setLevel(logging.INFO)
+    log.info("Starting bot")
+
     env = Env()
     env.read_env(override=True)
 
@@ -71,6 +76,7 @@ def main():
             updater.bot.send_message(chat_id=tg_chat_id,
                                      text=textwrap.dedent(text_message),
                                      parse_mode=ParseMode.HTML)
+            log.info("Send message")
         timestamp = checked_works['last_attempt_timestamp']
 
 
