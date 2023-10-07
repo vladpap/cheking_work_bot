@@ -8,19 +8,19 @@ from environs import Env
 from telegram import ParseMode
 from telegram.ext import Updater
 
-
 log = logging.getLogger('checking_work_bot')
 
 
 class TelegramLogHandler(logging.Handler):
-    def __init__(self, tg_token, tg_chat_id):
+    def __init__(self, tg_updater, tg_chat_id):
         super().__init__()
-        self.tg_token = tg_token
+        self.tg_updater = tg_updater
         self.tg_chat_id = tg_chat_id
 
     def emit(self, record):
         log_record = self.format(record)
-        self.tg_token.send_message(chat_id=self.tg_chat_id, text=log_record)
+        self.tg_updater.bot.send_message(
+            chat_id=self.tg_chat_id, text=log_record)
 
 
 def main():
@@ -32,15 +32,15 @@ def main():
     tg_token = env.str('TG_TOKEN')
     tg_chat_id = env.int('TG_CHAT_ID')
 
+    updater = Updater(tg_token)
+
     log.addHandler(
-        TelegramLogHandler(tg_token=tg_token, tg_chat_id=tg_chat_id))
+        TelegramLogHandler(tg_updater=updater, tg_chat_id=tg_chat_id))
     log.setLevel(logging.INFO)
     log.info("Starting bot")
 
     time_wait_long_polling = 10
     time_wait_without_connection = 90
-
-    updater = Updater(tg_token)
 
     long_polling_url = 'https://dvmn.org/api/long_polling/'
     headers = {'Authorization': f'Token {devman_api_token}'}
