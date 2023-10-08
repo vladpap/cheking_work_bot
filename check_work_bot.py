@@ -59,9 +59,8 @@ def main():
         except requests.exceptions.ReadTimeout:
             continue
 
-        except requests.exceptions.ConnectionError as connect_err:
-            log.error(connect_err, exc_info=True)
-            log.error('Problem connection.')
+        except requests.exceptions.ConnectionError:
+            log.exception('Problem connection.')
             time.sleep(time_wait_without_connection)
             continue
 
