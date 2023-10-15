@@ -1,5 +1,6 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Telegram](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
 
 # Бот уведомления о проверке работ
 
@@ -33,6 +34,21 @@ TG_CHAT_ID=9954393459
 
 ```console
 $ python3 check_work_bot.py
+```
+
+## Запуск с помощью Docker
+- Должен быть установлен [Docker Desktop](https://docs.docker.com/get-docker/).
+
+Для создания образа используйте команды (можно пропустить этот шаг и образ будет скачен из [docker hub]())
+
+```console
+$ docker build -t <docker_image> .
+$ docker run -d --env-file .env <docker image>
+```
+Для скачивания образа из [docker hub](https://hub.docker.com/r/vladimirpapin/check_work_bot)
+
+```console
+$ docker run -d --env-file .env vladimirpapin/check_work_bot
 ```
 
 ## Цели проекта
