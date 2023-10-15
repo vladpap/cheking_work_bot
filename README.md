@@ -39,13 +39,14 @@ $ python3 check_work_bot.py
 ## Запуск с помощью Docker
 - Должен быть установлен [Docker Desktop](https://docs.docker.com/get-docker/).
 
-Для создания образа используйте команды (можно пропустить этот шаг и образ будет скачен из [docker hub]())
+Для создания образа используйте команды
 
 ```console
 $ docker build -t <docker_image> .
 $ docker run -d --env-file .env <docker image>
 ```
-Для скачивания образа из [docker hub](https://hub.docker.com/r/vladimirpapin/check_work_bot)
+Для запуска образа из [docker hub](https://hub.docker.com/r/vladimirpapin/check_work_bot)
+создайте файл `.env` и выполните команду
 
 ```console
 $ docker run -d --env-file .env vladimirpapin/check_work_bot
